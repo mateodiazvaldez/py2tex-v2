@@ -115,7 +115,8 @@ class Py2Tex(ast.NodeVisitor, CodeGen):
         return r"\PyStr{" + node.s + "}"
 
     def visit_Name(self, node):
-        return r"\PyName{" + node.id + "}"
+        safe_id = node.id.replace('_', r'\_')
+        return r"\PyName{" + safe_id + "}"
 
     def visit_Num(self, node):
         return r"\PyNum{" + str(node.n) + "}"

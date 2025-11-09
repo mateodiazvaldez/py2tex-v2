@@ -22,8 +22,12 @@ COPY py2tex_files/py2tex.py /usr/local/bin/py2tex_exec.py
 # Actualizar la base de datos de LaTeX para que encuentre el .sty
 RUN texhash
 
-# Definir el directorio de trabajo
-WORKDIR /app
+# Copiar el script de conversión
+COPY convert.sh /usr/local/bin/convert_exec.sh
+# Dar permisos de ejecución
+RUN chmod +x /usr/local/bin/convert_exec.sh
+# Corregir el formato de saltos de línea (CRLF a LF) de forma permanente dentro de Docker
+RUN sed -i 's/\r$//' /usr/local/bin/convert_exec.sh
 
-# El punto de entrada será Bash, para poder ejecutar el script de conversión
+WORKDIR /app
 ENTRYPOINT ["/bin/bash"]

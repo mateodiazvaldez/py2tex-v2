@@ -20,8 +20,11 @@ echo ======================================================
 echo 2. Ejecutando la conversion y montando directorios
 echo ======================================================
 
-REM El comando usa la tubería para limpiar los saltos de línea y ejecutar el script.
-docker run --rm --entrypoint /bin/bash -v "%CURRENT_DIR%src:/app/src" -v "%CURRENT_DIR%output:/app/output" -v "%CURRENT_DIR%convert.sh:/app/convert.sh" %DOCKER_IMAGE% -c "cat /app/convert.sh | tr -d '\r' | bash"
+REM Ejecutar el script pre-copiado y formateado con el comando simple.
+docker run --rm ^
+    -v "%CURRENT_DIR%src:/app/src" ^
+    -v "%CURRENT_DIR%output:/app/output" ^
+    %DOCKER_IMAGE% /usr/local/bin/convert_exec.sh
 
 echo.
 echo ======================================================
