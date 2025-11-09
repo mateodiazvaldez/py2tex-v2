@@ -21,7 +21,7 @@ for file_path in $SRC_DIR/*.py; do
         # [H] fuerza la colocación aquí.
         echo '\begin{algorithm*}[H]' > "$output_file"
         echo "\caption{Pseudocódigo del algoritmo: \texttt{$rootname}}" >> "$output_file"
-        echo '\label{alg:'"$rootname"'}' >> "$output_file"
+        # La línea \label se elimina porque es incompatible con \begin{algorithm*}
         echo '\begin{algorithmic}[1]' >> "$output_file"
 
         # 2. Ejecutar py2tex.py y AÑADIR su contenido
