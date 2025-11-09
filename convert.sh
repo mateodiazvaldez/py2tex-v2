@@ -19,7 +19,7 @@ for file_path in $SRC_DIR/*.py; do
 
         # 1. Escribir el inicio del entorno contenedor (\begin{algorithm})
         # [H] fuerza la colocación aquí.
-        echo '\begin{algorithm*}[H]' > "$output_file"
+        echo '\begin{algorithm}[H]' > "$output_file"
         echo "\caption{Pseudocódigo del algoritmo: \texttt{$rootname}}" >> "$output_file"
         echo '\label{alg:'"$rootname"'}' >> "$output_file"
         echo '\begin{algorithmic}[1]' >> "$output_file"
@@ -29,7 +29,7 @@ for file_path in $SRC_DIR/*.py; do
 
         # 3. Escribir el cierre de los entornos
         echo '\end{algorithmic}' >> "$output_file"
-        echo '\end{algorithm*}' >> "$output_file"
+        echo '\end{algorithm}' >> "$output_file"
     fi
 done
 

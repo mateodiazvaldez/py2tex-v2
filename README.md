@@ -49,7 +49,6 @@ En tu archivo `.tex` principal, asegúrate de que tu preámbulo (la parte antes 
 % --- PAQUETES REQUERIDOS ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[spanish]{babel} % Recomendado para LaTeX en español
 
 % Paquetes para algoritmos
 \usepackage{algorithm}     % Para el entorno \begin{algorithm}
@@ -76,7 +75,7 @@ En el cuerpo de tu documento, usa el comando `\input{}` para incluir el archivo 
 A continuación, se presenta el pseudocódigo del algoritmo de ejemplo,
 generado automáticamente desde la fuente de Python.
 
-% Aquí importas el archivo (ajusta la ruta si es necesario)
+% Aquí importas el archivo
 \input{output/txt/example.tex}
 
 El análisis continúa después del algoritmo...
@@ -85,74 +84,5 @@ El análisis continúa después del algoritmo...
 ```
 
 ¡Eso es todo\! Al compilar tu `.tex` principal, LaTeX encontrará el archivo `example.tex`, leerá su contenido y lo renderizará como un algoritmo con formato.
-
------
-
-## 🎨 Personalización Avanzada
-
-Puedes personalizar la apariencia y el idioma del pseudocódigo generado.
-
-### 1\. Cambiar el Idioma a Español
-
-Las palabras clave del pseudocódigo (como `function`, `if`, `while`, etc.) se definen en el archivo de estilo de LaTeX.
-
-**Archivo a modificar:** `py2tex_files/py2tex.sty`
-
-**A. Palabras Clave (Línea 50 aprox.):**
-Busca este bloque de código:
-
-```latex
-\algrenewcommand\algorithmicprocedure{{\textbs{procedure}}}
-\algrenewcommand\algorithmicfunction{{\textbs{function}}}
-\algrenewcommand\algorithmicif{{\textbs{if}}}
-\algrenewcommand\algorithmicthen{{\textbs{then}}}
-\algrenewcommand\algorithmicelse{{\textbs{else}}}
-\algrenewcommand\algorithmicwhile{{\textbs{while}}}
-% ... etc.
-```
-
-Y reemplaza las palabras en inglés por las de tu preferencia:
-
-```latex
-\algrenewcommand\algorithmicprocedure{{\textbs{procedimiento}}}
-\algrenewcommand\algorithmicfunction{{\textbs{función}}}
-\algrenewcommand\algorithmicif{{\textbs{si}}}
-\algrenewcommand\algorithmicthen{{\textbs{entonces}}}
-\algrenewcommand\algorithmicelse{{\textbs{sino}}}
-\algrenewcommand\algorithmicwhile{{\textbs{mientras}}}
-% ... etc.
-```
-
-**B. Traducir "print" (Línea 80 aprox.):**
-Para cambiar el comando `print` (que por defecto es "output"), busca:
-
-```latex
-\newcommand{\PyCall}[2]{
-	\ifnum\pdfstrcmp{#1}{print}=0
-  	\textbs{output~} { \tt#2} 
-	\else
-% ...
-```
-
-Y cámbialo por la palabra en español que prefieras (ej. `mostrar`):
-
-```latex
-% ...
-  	\textbs{mostrar~} { \tt#2} 
-% ...
-```
-
-Después de guardar estos cambios, solo vuelve a ejecutar `run_conversion.cmd` o `run_conversion.sh`. El `docker build` detectará los cambios.
-
-### 2\. Quitar el "Algorithm 1" del Título
-
-Para que el algoritmo no se numere y solo muestre tu `\caption`, puedes usar el entorno `algorithm*` (con asterisco).
-
-**Archivo a modificar:** `convert.sh`
-
-  * **Línea 19 (aprox.):** Cambia `\begin{algorithm}[H]` por `\begin{algorithm*}[H]`.
-  * **Línea 26 (aprox.):** Cambia `\end{algorithm}` por `\end{algorithm*}`.
-
-<!-- end list -->
 
 ```
