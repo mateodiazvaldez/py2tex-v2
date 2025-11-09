@@ -1,0 +1,29 @@
+\begin{algorithm}[H]
+\caption{Pseudocódigo del algoritmo: \texttt{example}}
+\label{alg:example}
+\begin{algorithmic}[1]
+\Function{function}{\PyArgAnnotation{a}{integer[]}\PyArgSep\PyArgAnnotation{N}{integer}}{ $\rightarrow$ \texttt{integer}}
+  \State{\PyAnnotation{\PyName{palo}}{integer}}
+  \State{\PyAnnotation{\PyName{dado}}{integer}}
+  \State{\PyAnnotation{\PyName{i}}{integer}}
+  \State{\PyAssign{\PyName{palo}}{\PyExpr{\PyUSub{\PyNum{1}}}}}
+  \State{\PyAssign{\PyName{dado}}{\PyExpr{\PyUSub{\PyNum{1}}}}}
+  \State{\PyAssign{\PyName{i}}{\PyExpr{\PyUSub{\PyNum{1}}}}}
+  \State{\PyExpr{\PyCall{print}{\PyName{dado}}}}
+  \State{\PyExpr{\PyCall{print}{\PyStr{Hello World!}}}}
+  \While{\PyExpr{\PyName{i} \PyLtE \PyName{N}}}
+    \If{\PyExpr{\PySubscript{\PyName{a}}{\PyName{i}} \PyMod \PyNum{2} \PyEq \PyNum{0}}}
+      \If{\PyExpr{\PySubscript{\PyName{a}}{\PyName{i}} \PyGt \PyName{palo}}}
+        \State{\PyAssign{\PyName{palo}}{\PyExpr{\PySubscript{\PyName{a}}{\PyName{i}}}}}
+      \EndIf%
+    \Else%
+      \If{\PyExpr{\PySubscript{\PyName{a}}{\PyName{i}} \PyGt \PyName{dado}}}
+        \State{\PyAssign{\PyName{dado}}{\PyExpr{\PySubscript{\PyName{a}}{\PyName{i}}}}}
+      \EndIf%
+    \EndIf%
+    \State{\PyAssign{\PyName{i}}{\PyExpr{\PyName{i} \PyAdd \PyNum{1}}}}
+  \EndWhile%
+  \Return{\PyExpr{\PyName{palo} \PyAdd \PyName{dado}}}
+\EndFunction%
+\end{algorithmic}
+\end{algorithm}
