@@ -60,4 +60,29 @@ En tu archivo `.tex` principal, asegúrate de que tu preámbulo (la parte antes 
 % -------------------------
 
 \begin{document}
+````
+
+### Paso 3: Importa tu Algoritmo
+
+En el cuerpo de tu documento, usa el comando `\input{}` para incluir el archivo `.tex` generado:
+
+```latex
+\documentclass{article}
+% ... (todos los paquetes del Paso 2) ...
+\begin{document}
+
+\section{Análisis de Algoritmos}
+A continuación, se presenta el pseudocódigo del algoritmo de ejemplo,
+generado automáticamente desde la fuente de Python.
+
+% Aquí importas el archivo
+\input{output/txt/example.tex}
+
+El análisis continúa después del algoritmo...
+
+\end{document}
+```
+
+¡Eso es todo\! Al compilar tu `.tex` principal, LaTeX encontrará el archivo `example.tex`, leerá su contenido y lo renderizará como un algoritmo con formato.
+
 ```
