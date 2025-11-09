@@ -1,4 +1,4 @@
-def function(a: 'integer[]', N: 'integer') -> 'integer':
+def function(a: 'integer', N: 'integer') -> 'integer':
     palo: 'integer'
     dado: 'integer'
     i: 'integer'

@@ -43,6 +43,7 @@ Copia el archivo `py2tex_files/py2tex.sty` a la misma carpeta donde está tu arc
 ### Paso 2: Carga los Paquetes en tu Preámbulo
 En tu archivo `.tex` principal, asegúrate de que tu preámbulo (la parte antes de `\begin{document}`) contenga los siguientes paquetes:
 
+```latex
 \documentclass{article}
 
 % --- PAQUETES REQUERIDOS ---
@@ -59,21 +60,4 @@ En tu archivo `.tex` principal, asegúrate de que tu preámbulo (la parte antes 
 % -------------------------
 
 \begin{document}
-
-### Paso 3: Importa tu Algoritmo
-En el cuerpo de tu documento, usa el comando \input{} para incluir el archivo .tex generado:
-
-\documentclass{article}
-% ... (todos los paquetes del Paso 2) ...
-\begin{document}
-
-\section{Análisis de Algoritmos}
-A continuación, se presenta el pseudocódigo del algoritmo de ejemplo,
-generado automáticamente desde la fuente de Python.
-
-% Aquí importas el archivo (ajusta la ruta si es necesario)
-\input{output/txt/example.tex}
-
-El análisis continúa después del algoritmo...
-
-\end{document}
+```
