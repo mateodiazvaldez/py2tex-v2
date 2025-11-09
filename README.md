@@ -154,3 +154,5 @@ Para que el algoritmo no se numere y solo muestre tu `\caption`, puedes usar el 
   * **Línea 26 (aprox.):** Cambia `\end{algorithm}` por `\end{algorithm*}`.
 
 <!-- end list -->
+
+```
