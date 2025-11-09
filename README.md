@@ -143,14 +143,3 @@ Y cámbialo por la palabra en español que prefieras (ej. `mostrar`):
 ```
 
 Después de guardar estos cambios, solo vuelve a ejecutar `run_conversion.cmd` o `run_conversion.sh`. El `docker build` detectará los cambios.
-
-### 2\. Quitar el "Algorithm 1" del Título
-
-Para que el algoritmo no se numere y solo muestre tu `\caption`, puedes usar el entorno `algorithm*` (con asterisco).
-
-**Archivo a modificar:** `convert.sh`
-
-  * **Línea 19 (aprox.):** Cambia `\begin{algorithm}[H]` por `\begin{algorithm*}[H]`.
-  * **Línea 26 (aprox.):** Cambia `\end{algorithm}` por `\end{algorithm*}`.
-
-<!-- end list -->
