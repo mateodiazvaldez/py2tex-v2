@@ -20,16 +20,8 @@ echo ======================================================
 echo 2. Ejecutando la conversion y montando directorios
 echo ======================================================
 
-REM El comando monta los directorios y luego ejecuta una cadena de comandos:
-REM 1. sed -i 's/\r$//' /app/convert.sh: Limpia los saltos de linea (CRLF a LF).
-REM 2. &&: Solo si la limpieza fue exitosa.
-REM 3. /app/convert.sh: Ejecuta el script de conversion.
-
-docker run --rm ^
-    -v "%CURRENT_DIR%src:/app/src" ^
-    -v "%CURRENT_DIR%output:/app/output" ^
-    -v "%CURRENT_DIR%convert.sh:/app/convert.sh" ^
-    %DOCKER_IMAGE% /bin/bash -c "sed -i 's/\r$//' /app/convert.sh && /app/convert.sh"
+REM El comando usa la tubería para limpiar los saltos de línea y ejecutar el script.
+docker run --rm -v "%CURRENT_DIR%src:/app/src" -v "%CURRENT_DIR%output:/app/output" -v "%CURRENT_DIR%convert.sh:/app/convert.sh" %DOCKER_IMAGE% /bin/bash -c "cat /app/convert.sh | tr -d '\r' | bash"
 
 echo.
 echo ======================================================
