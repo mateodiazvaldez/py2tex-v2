@@ -1,0 +1,52 @@
+\begin{algorithm}[H]
+\caption{Pseudocódigo del algoritmo: \texttt{plano_cartesiano}}
+\label{alg:plano_cartesiano}
+\begin{algorithmic}[1]
+\Procedure{menor\_distancia}{\PyArg{puntos}}
+  \If{\PyExpr{\PyCall{len}{\PyName{puntos}} \PyEq \PyNum{2}}}
+    \Return{\PyExpr{(\PySubscript{\PyName{puntos}}{\PyNum{0}} \PyCallSep \PySubscript{\PyName{puntos}}{\PyNum{1}})}}
+  \Else%
+    \If{\PyExpr{\PyCall{len}{\PyName{puntos}} \PyEq \PyNum{3}}}
+      \State{\PyAssign{\PyName{d1}}{\PyExpr{\PyCall{medir_distancia_c}{\PySubscript{\PyName{puntos}}{\PyNum{0}} \PyCallSep \PySubscript{\PyName{puntos}}{\PyNum{1}}}}}}
+      \State{\PyAssign{\PyName{d2}}{\PyExpr{\PyCall{medir_distancia_c}{\PySubscript{\PyName{puntos}}{\PyNum{1}} \PyCallSep \PySubscript{\PyName{puntos}}{\PyNum{2}}}}}}
+      \State{\PyAssign{\PyName{d3}}{\PyExpr{\PyCall{medir_distancia_c}{\PySubscript{\PyName{puntos}}{\PyNum{0}} \PyCallSep \PySubscript{\PyName{puntos}}{\PyNum{2}}}}}}
+      \State{\PyAssign{\PyName{min\_dist}}{\PyExpr{\PyCall{min}{\PyName{d1} \PyCallSep \PyName{d2} \PyCallSep \PyName{d3}}}}}
+      \If{\PyExpr{\PyName{min\_dist} \PyEq \PyName{d1}}}
+        \Return{\PyExpr{(\PySubscript{\PyName{puntos}}{\PyNum{0}} \PyCallSep \PySubscript{\PyName{puntos}}{\PyNum{1}})}}
+      \Else%
+        \If{\PyExpr{\PyName{min\_dist} \PyEq \PyName{d2}}}
+          \Return{\PyExpr{(\PySubscript{\PyName{puntos}}{\PyNum{1}} \PyCallSep \PySubscript{\PyName{puntos}}{\PyNum{2}})}}
+        \Else%
+          \Return{\PyExpr{(\PySubscript{\PyName{puntos}}{\PyNum{0}} \PyCallSep \PySubscript{\PyName{puntos}}{\PyNum{2}})}}
+        \EndIf%
+      \EndIf%
+    \Else%
+      \State{\PyExpr{\PyName{puntos}.sort(key = \PyLambda{punto}{\PyName{punto}.x})}}
+      \State{\PyAssign{\PyName{medio}}{\PyExpr{\PyCall{len}{\PyName{puntos}} \PyFloorDiv \PyNum{2}}}}
+      \State{\PyAssign{\PyName{solucion\_izq}}{\PyExpr{\PyCall{menor_distancia}{\PySubscript{\PyName{puntos}}{:\PyName{medio}}}}}}
+      \State{\PyAssign{\PyName{solucion\_der}}{\PyExpr{\PyCall{menor_distancia}{\PySubscript{\PyName{puntos}}{\PyName{medio}:}}}}}
+      \If{\PyExpr{\PyCall{medir_distancia_c}{*\PyName{solucion\_der}} \PyLt \PyCall{medir_distancia_c}{*\PyName{solucion\_izq}}}}
+        \State{\PyAssign{\PyName{mejor\_solucion}}{\PyExpr{\PyName{solucion\_der}}}}
+      \Else%
+        \State{\PyAssign{\PyName{mejor\_solucion}}{\PyExpr{\PyName{solucion\_izq}}}}
+      \EndIf%
+      \State{\PyAssign{\PyName{puntos\_medio}}{\PyExpr{\PyList{}}}}
+      \ForEach{\PyName{punto} \in \PyName{puntos}}
+        \If{\PyExpr{\PyName{punto}.x \PySub \PySubscript{\PyName{puntos}}{\PyName{medio}}.x \PyLt \PyCall{medir_distancia_c}{*\PyName{mejor\_solucion}}}}
+          \State{\PyExpr{\PyName{puntos\_medio}.append(\PyName{punto})}}
+        \EndIf%
+      \EndForEach
+      \State{\PyExpr{\PyName{puntos\_medio}.sort(key = \PyLambda{punto}{\PyName{punto}.y})}}
+      \PyFor{\PyName{i}}{0}{\PyCall{len}{\PyName{puntos\_medio}} \PySub \PyNum{1}}{1}
+        \If{\PyExpr{\PySubscript{\PyName{puntos\_medio}}{\PyName{i} \PyAdd \PyNum{1}}.y \PySub \PySubscript{\PyName{puntos\_medio}}{\PyName{i}}.y \PyPow \PyNum{2} \PyLt \PyCall{medir_distancia_c}{*\PyName{mejor\_solucion}}}}
+          \If{\PyExpr{\PyCall{medir_distancia_c}{\PySubscript{\PyName{puntos\_medio}}{\PyName{i}} \PyCallSep \PySubscript{\PyName{puntos\_medio}}{\PyName{i} \PyAdd \PyNum{1}}} \PyLt \PyCall{medir_distancia_c}{*\PyName{mejor\_solucion}}}}
+            \State{\PyAssign{\PyName{mejor\_solucion}}{\PyExpr{(\PySubscript{\PyName{puntos\_medio}}{\PyName{i}} \PyCallSep \PySubscript{\PyName{puntos\_medio}}{\PyName{i} \PyAdd \PyNum{1}})}}}
+          \EndIf%
+        \EndIf%
+      \EndPyFor
+      \Return{\PyExpr{\PyName{mejor\_solucion}}}
+    \EndIf%
+  \EndIf%
+\EndProcedure%
+\end{algorithmic}
+\end{algorithm}

@@ -17,42 +17,19 @@
 %For bold sans serif
 \newcommand \textbs[1]{\textsf{\textbf{#1}}}
 
-%For large font for Italian keywords decomment the following
-%\algrenewcommand\algorithmicprocedure{{\large\textbf{procedura}}}
-%\algrenewcommand\algorithmicfunction{{\large \textbf{funzione}}}
-%\algrenewcommand\algorithmicif{{\large \textbf{se}}}
-%\algrenewcommand\algorithmicthen{{\large \textbf{allora}}}
-%\algrenewcommand\algorithmicelse{{\large \textbf{altrimenti}}}
-%\algrenewcommand\algorithmicwhile{{\large \textbf{finchè}}}
-%\algrenewcommand\algorithmicdo{{\large \textbf{ripeti}}}
-%\algrenewcommand\algorithmicend{{\large \textbf{fine}}}
-%\algrenewcommand\algorithmicrepeat{{\large \textbf{ripeti}}}
-%\algrenewcommand\algorithmicuntil{{\large \textbf{finchè}}}
-
-%For Italian keywords decomment the following
-%\algrenewcommand\algorithmicprocedure{{\textbf{procedura}}}
-%\algrenewcommand\algorithmicfunction{{\textbf{funzione}}}
-%\algrenewcommand\algorithmicif{{\textbf{se}}}
-%\algrenewcommand\algorithmicthen{{\textbf{allora}}}
-%\algrenewcommand\algorithmicelse{{\textbf{altrimenti}}}
-%\algrenewcommand\algorithmicwhile{{\textbf{finchè}}}
-%\algrenewcommand\algorithmicdo{{\textbf{ripeti}}}
-%\algrenewcommand\algorithmicend{{\textbf{fine}}}
-%\algrenewcommand\algorithmicrepeat{{\textbf{ripeti}}}
-%\algrenewcommand\algorithmicuntil{{\textbf{finchè}}}
-%\algrenewcommand\algorithmicreturn{\State{{\textbf{restituisci}}}}
-
-\algrenewcommand\algorithmicprocedure{{\textbs{procedure}}}
-\algrenewcommand\algorithmicfunction{{\textbs{function}}}
-\algrenewcommand\algorithmicif{{\textbs{if}}}
-\algrenewcommand\algorithmicthen{{\textbs{then}}}
-\algrenewcommand\algorithmicelse{{\textbs{else}}}
-\algrenewcommand\algorithmicwhile{{\textbs{while}}}
-\algrenewcommand\algorithmicdo{{\textbs{do}}}
-\algrenewcommand\algorithmicend{{\textbs{end}}}
-\algrenewcommand\algorithmicrepeat{{\textbs{do}}}
-\algrenewcommand\algorithmicuntil{{\textbs{while}}}
-\algrenewcommand\algorithmicreturn{\State{{\textbs{return}}}}
+% --- Palabras Clave del Algoritmo ---
+% --- Puedes traducir esto a 'función', 'si', 'mientras', etc. ---
+\algrenewcommand\algorithmicprocedure{{\textbs{procedimiento}}}
+\algrenewcommand\algorithmicfunction{{\textbs{función}}}
+\algrenewcommand\algorithmicif{{\textbs{si}}}
+\algrenewcommand\algorithmicthen{{\textbs{entonces}}}
+\algrenewcommand\algorithmicelse{{\textbs{sino}}}
+\algrenewcommand\algorithmicwhile{{\textbs{mientras}}}
+\algrenewcommand\algorithmicdo{{\textbs{hacer}}}
+\algrenewcommand\algorithmicend{{\textbs{fin}}}
+\algrenewcommand\algorithmicrepeat{{\textbs{hacer}}}
+\algrenewcommand\algorithmicuntil{{\textbs{mientras}}}
+\algrenewcommand\algorithmicreturn{\State{{\textbs{retornar}}}}
 
 
 \algblock[Name]{Start}{End}
@@ -73,8 +50,9 @@
 \newcommand{\PyAssignSep}[0]{,~}
 
 \newcommand{\PyCall}[2]{
+    % --- Traducción de 'print' ---
 	\ifnum\pdfstrcmp{#1}{print}=0
-  	\textbs{output~} { \tt#2} 
+  	\textbs{mostrar~} { \tt#2} 
 	\else
 		\textsc{#1}( {\tt#2} )
 	\fi
@@ -91,10 +69,6 @@
 \newcommand{\PyGt}[0]{>}
 \newcommand{\PyGtE}[0]{\ge}
 
-%\newcommand{\PyIn}[0]{}
-%\newcommand{\PyIs}[0]{}
-%\newcommand{\PyIsNot}[0]{}
-
 \newcommand{\PyList}[1]{[#1]}
 \newcommand{\PyListSep}[0]{, }
 \newcommand{\PyLt}[0]{<}
@@ -106,10 +80,9 @@
 \newcommand{\PyOr}[0]{\textbf{ or }}
 
 \newcommand{\PyName}[1]{\texttt{#1}}
-%\newcommand{\PyNone}[0]{\textt{}}
+
 \newcommand{\PyNot}[1]{\textbf{ not }#1}
 \newcommand{\PyNotEq}[0]{\neq}
-%\newcommand{\PyNotIn}[0]{}
 \newcommand{\PyNum}[1]{\texttt{#1}}
 
 \newcommand{\PyPar}[1]{\left ( #1 \right )}
@@ -125,4 +98,28 @@
 \newcommand{\PyUSub}[1]{- #1}
 
 
+% --- NUEVOS COMANDOS AÑADIDOS ---
 
+% Para 'for x in y'
+\algblock[ForEach]{ForEach}{EndForEach}
+\algnewcommand{\ForEach}[1]{\State \textbs{para cada} #1 \textbs{en} \textbs{hacer}}
+\algrenewcommand{\EndForEach}{\textbs{fin para}}
+
+% Para 'for i in range(...)' (Asumiendo 4 argumentos: var, inicio, fin, paso)
+\algblock[PyFor]{PyFor}{EndPyFor}
+\algnewcommand{\PyFor}[4]{\State \textbs{para} $\texttt{#1} \gets \texttt{#2}$ \textbs{hasta} $\texttt{#3}$ \textbs{con paso} $\texttt{#4}$ \textbs{hacer}}
+\algrenewcommand{\EndPyFor}{\textbs{fin para}}
+
+% Para '//' (división entera)
+\newcommand{\PyFloorDiv}[0]{\mathop{\mathbf{div}}}
+
+% Para 'lambda'
+\newcommand{\PyLambda}[2]{\ensuremath{\lambda\, \texttt{#1} \colon #2}}
+
+% Para 'None'
+\newcommand{\PyNone}[0]{\texttt{null}}
+
+% Para Errores
+\newcommand{\ERROR}[1]{\textcolor{red}{\textbf{#1}}}
+
+}
